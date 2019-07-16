@@ -3,7 +3,8 @@
 include_once "../model/geral.php";
 
 if ($_POST) {
-    getPost ($_POST);
+    $cliente = saida ($_POST);
+    var_dump($cliente);
 }
 
 ?>
@@ -25,14 +26,16 @@ if ($_POST) {
             Check-out
         </div>
         <div class="card-body">
-            <form action="dashboard.php" method="post">
+            <form action="saida.php" method="post">
                 <div class="row">
                     <div class="form-group col-12">
                         <input class="form-control" type="text" name="placa" placeholder="Placa do Veículo" id="placa">
                     </div>
                 </div>
                 <div class="row btn-row">
-                    <input class="btn btn-success col-12" type="submit" value="Realizar Check-out" id="check-out">
+                    <input class="btn btn-success btn-lg" type="submit" value="Realizar Check-out" id="check-out">
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao
+                        Inicio</a>
                 </div>
             </form>
         </div>
