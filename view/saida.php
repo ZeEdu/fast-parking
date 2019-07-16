@@ -3,8 +3,9 @@
 include_once "../model/geral.php";
 
 if ($_POST) {
-    $cliente = saida ($_POST);
-    var_dump($cliente);
+    saida ($_POST);
+    $receiveQuery = calcular ($_POST);
+    var_dump($receiveQuery);
 }
 
 ?>

@@ -1,7 +1,6 @@
 <?php
 
 include_once "../model/geral.php";
-
 if ($_POST) {
     entrada ($_POST);
 }
@@ -25,7 +24,7 @@ if ($_POST) {
             Check-in de Cliente
         </div>
         <div class="card-body">
-            <form action="entrada.php" method="post">
+            <form action="recibo.php" method="post">
                 <div class="row">
                     <div class="form-group col-12">
                         <input class="form-control" type="text" name="nome" placeholder="Nome Completo do Cliente" id="nome">
