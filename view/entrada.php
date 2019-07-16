@@ -3,7 +3,7 @@
 include_once "../model/geral.php";
 
 if ($_POST) {
-    checkIn ($_POST);
+    entrada ($_POST);
 }
 
 ?>
@@ -22,10 +22,10 @@ if ($_POST) {
 <body>
     <div class="card mx-auto mt-5 container" style="width:60vw">
         <div class="card-header text-center">
-            Check-out
+            Check-in de Cliente
         </div>
         <div class="card-body">
-            <form action="checkin.php" method="post">
+            <form action="entrada.php" method="post">
                 <div class="row">
                     <div class="form-group col-12">
                         <input class="form-control" type="text" name="nome" placeholder="Nome Completo do Cliente" id="nome">
@@ -38,7 +38,8 @@ if ($_POST) {
                     </div>
                 </div>
                 <div class="row btn-row">
-                    <input class="btn btn-success col-12" type="submit" value="Realizar Check-out" id="check-out">
+                    <input class="btn btn-success btn-lg" type="submit" value="Enviar Dados" id="check-in">
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao Inicio</a>
                 </div>
             </form>
         </div>
