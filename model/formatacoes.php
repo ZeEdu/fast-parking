@@ -16,18 +16,15 @@ function formatarData($data){
 function calcularpagamento($precoUm, $precoDois, $tempo){
     if ( $tempo > 1 ) {
         $precoFinal = ( ( ( $tempo - 1 ) * $precoDois ) + $precoUm );
+    } else {
+        $precoFinal = ( $tempo * $precoUm );
     }
     return $precoFinal;
 }
 
 function guardarRelatorio($dataId, $saida, $pagamento){
-    $conexao = include_once("conexao.php");
+    $conexao = include("conexao.php");
     $sql = "UPDATE clientes SET saida = '".$saida."', pagamento = ".$pagamento."  WHERE id = ".$dataId."";
-    if (is_object($conexao)){
-        echo "É objeto";
-    } else {
-        echo "Não é objeto";
-    }
     $conexao->query($sql);
     $conexao->close();
 }

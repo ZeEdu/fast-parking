@@ -1,10 +1,16 @@
 <?php
 
 include_once "../model/geral.php";
-
-if ($_POST) {
-    buscaSaida($_POST);
+session_start();
+if (isset($_SESSION['primeiraHora']) & isset($_SESSION['segundaHora'])) {
+    if ($_POST) {
+        saida($_POST);
+    }    
+} else {
+    echo "Variaveis de Sessão Não Existem";
 }
+
+
 
 ?>
 <!DOCTYPE html>
@@ -33,8 +39,7 @@ if ($_POST) {
                 </div>
                 <div class="row btn-row">
                     <input class="btn btn-success btn-lg" type="submit" value="Realizar Check-out" id="check-out">
-                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao
-                        Inicio</a>
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao Inicio</a>
                 </div>
             </form>
         </div>

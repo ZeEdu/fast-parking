@@ -1,10 +1,13 @@
 <?php
 
 include_once "../model/geral.php";
-
+session_start();
 if ($_POST) {
-    getPost ($_POST);
+    $_SESSION['primeiraHora'] = $_POST['primeira-hora'];
+    $_SESSION['segundaHora'] = $_POST['horas-seguintes'];
 }
+echo $_SESSION['primeiraHora'];
+echo $_SESSION['segundaHora'];
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +28,7 @@ if ($_POST) {
             Atualizar Preços
         </div>
         <div class="card-body">
-            <form action="dashboard.php" method="post">
+            <form action="precos.php" method="post">
                 <div class="row">
                     <div class="form-group col-12">
                         <input class="form-control" type="number" name="primeira-hora" placeholder="Preço Primeira Hora"
@@ -35,9 +38,11 @@ if ($_POST) {
                         <input class="form-control" type="number" name="horas-seguintes"
                             placeholder="Preço Horas Subsequentes" id="demais-hora">
                     </div>
+
                 </div>
                 <div class="row btn-row">
-                    <input class="btn btn-success col-12" type="submit" value="Atualizar Preços" id="check-out">
+                    <input class="btn btn-success btn-lg" type="submit" value="Atualizar Preços" id="check-out">
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao Inicio</a>
                 </div>
             </form>
         </div>

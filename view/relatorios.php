@@ -1,7 +1,7 @@
 <?php
 
 include_once "../model/geral.php";
-
+// SELECT SUM(pagamento) FROM `clientes` WHERE DATE_FORMAT(entrada, "%m-%Y") = "07-2019";
 if ($_POST) {
     getPost ($_POST);
 }
@@ -27,7 +27,8 @@ if ($_POST) {
         <div class="card-body">
             <form action="dashboard.php" method="post">
                 <div class="row btn-row">
-                    <input class="btn btn-success col-6" type="button" value="Gerar Relatórios" id="check-in">
+                    <input class="btn btn-success btn-lg" type="button" value="Gerar Relatórios" id="check-in">
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao Inicio</a>
                 </div>
             </form>
         </div>

@@ -29,8 +29,7 @@ function impressaoCorpo($dados){
 }
 
 
-function buscaSaida($dados){
-  
+function saida($dados){
   $conexao = include_once("conexao.php");
   $sql = "SELECT id, entrada FROM clientes WHERE placa = '$dados[placa]' AND saida IS NULL";
   if ($consulta = $conexao->query($sql)) {
@@ -41,18 +40,11 @@ function buscaSaida($dados){
       $dataHoraAtual = date('Y-m-d H:i:s');
       $definirFormatoDiferenca = '%h';
       $diferencaHoras = diferenciarData($dataFormatada, $dataHoraAtual, $definirFormatoDiferenca);
-      $primeiraHora = 15;
-      $segundaHora = 5;
+      $primeiraHora = $_SESSION['primeiraHora'];
+      $segundaHora = $_SESSION['segundaHora'];
       $pagamento = calcularpagamento($primeiraHora, $segundaHora, $diferencaHoras);
       guardarRelatorio($dataId, $dataHoraAtual, $pagamento);
   } else {
     echo "Erro de Conexão";
   }
-}
-
-function saida ($dados){
-    $conexao = include_once("conexao.php");
-    $sql = "update clientes set saida = LOCALTIME() WHERE placa = '$dados[placa]'";
-    $conexao->query ($sql);
-    $conexao->close();
 }

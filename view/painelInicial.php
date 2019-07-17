@@ -2,9 +2,20 @@
 
 include_once "../model/geral.php";
 
+session_start();
+
+if (isset($_SESSION['primeiraHora']) & isset($_SESSION['segundaHora'])) {
+    $varSessaoNoti =  "<span> - Variaveis de Sessão Existem</span>";
+} else {
+    $varSessaoNoti =  "<span> - Variaveis de Sessão Não Existem</span>";
+}
+
+// 
 
 
-
+// começar sessão, checar se as variaveis de sessão dos preços existem,
+// se não existirem deve-se dar um echo com um elemento HTML  
+//
 if ($_POST) {
     getPost ($_POST);
 }
@@ -33,13 +44,13 @@ if ($_POST) {
 
 <div class="card mx-auto mt-5 container" style="width:60vw">
     <div class="card-header text-center">
-        Tela Inicial
+        Tela Inicial <?php echo $varSessaoNoti ?>
     </div>
     <div class="card-body">
         <div class="row btn-row">
         <a href="entrada.php" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Realizar Check-in</a>
         <a href="saida.php" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Realizar Check-out</a>
-        <a href="preco.php" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Ajustar Preços</a>
+        <a href="precos.php" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Ajustar Preços</a>
         <a href="relatorios.php" class="btn btn-primary btn-lg" role="button" aria-disabled="true">Relatórios</a>
         </div>
     </div>
