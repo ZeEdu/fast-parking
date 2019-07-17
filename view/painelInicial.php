@@ -2,6 +2,9 @@
 
 include_once "../model/geral.php";
 
+
+
+
 if ($_POST) {
     getPost ($_POST);
 }

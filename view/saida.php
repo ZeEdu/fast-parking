@@ -3,9 +3,7 @@
 include_once "../model/geral.php";
 
 if ($_POST) {
-    saida ($_POST);
-    $receiveQuery = calcular ($_POST);
-    var_dump($receiveQuery);
+    buscaSaida($_POST);
 }
 
 ?>

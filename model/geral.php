@@ -1,5 +1,7 @@
 <?php
 
+include_once "formatacoes.php";
+
 function entrada ($dados) {
     $conexao = include_once("conexao.php");    
     $sql = "insert into clientes (nome, modelo, placa, entrada) 
@@ -26,17 +28,31 @@ function impressaoCorpo($dados){
     </div>";
 }
 
+
+function buscaSaida($dados){
+  
+  $conexao = include_once("conexao.php");
+  $sql = "SELECT id, entrada FROM clientes WHERE placa = '$dados[placa]' AND saida IS NULL";
+  if ($consulta = $conexao->query($sql)) {
+      $obj = $consulta->fetch_object();
+      $dataId = $obj->id;
+      $dataEntrada = $obj->entrada;
+      $dataFormatada = formatarData($dataEntrada);
+      $dataHoraAtual = date('Y-m-d H:i:s');
+      $definirFormatoDiferenca = '%h';
+      $diferencaHoras = diferenciarData($dataFormatada, $dataHoraAtual, $definirFormatoDiferenca);
+      $primeiraHora = 15;
+      $segundaHora = 5;
+      $pagamento = calcularpagamento($primeiraHora, $segundaHora, $diferencaHoras);
+      guardarRelatorio($dataId, $dataHoraAtual, $pagamento);
+  } else {
+    echo "Erro de Conexão";
+  }
+}
+
 function saida ($dados){
     $conexao = include_once("conexao.php");
     $sql = "update clientes set saida = LOCALTIME() WHERE placa = '$dados[placa]'";
     $conexao->query ($sql);
-    print_r($conexao);
     $conexao->close();
-}
-
-function calcular ($dados){
-    $conexao = include_once("conexao.php");
-    $sql = "select entrada, saida from clientes where placa = '$dados[placa]'";
-    $consulta = $conexao->query($sql);
-    return $consulta->fetch_object();
 }
