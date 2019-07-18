@@ -5,14 +5,10 @@ include_once "../model/geral.php";
 session_start();
 
 if (isset($_SESSION['primeiraHora']) & isset($_SESSION['segundaHora'])) {
-    $varSessaoNoti =  "<span> - Variaveis de Sessão Existem</span>";
+    $varSessaoNoti =  "<span> - Preços foram definidos</span>";
 } else {
-    $varSessaoNoti =  "<span> - Variaveis de Sessão Não Existem</span>";
+    $varSessaoNoti =  "<span> - Preços não foram definidos</span>";
 }
-
-// 
-
-
 // começar sessão, checar se as variaveis de sessão dos preços existem,
 // se não existirem deve-se dar um echo com um elemento HTML  
 //

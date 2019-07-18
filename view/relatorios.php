@@ -1,32 +1,3 @@
-<?php
-
-include_once "../model/geral.php";
-// var_dump($_POST["formato"]);
-
-// $_POST["formato"] = "";
-
-// var_dump($_POST["formato"]);
-if (isset($_POST) && isset($_POST["formato"])) {
-    echo "Entrou no PRIMEIRO IF";
-    // var_dump($_POST["formato"]);
-    // var_dump($_POST["data-especificada"]);
-    if ($_POST["formato"] == "data-expecifica" && $_POST["data-especificada"] <> "" ) {
-        echo "Entrou no SEGUNDO IF";
-        relatorioEspecificado($_POST["data-especificada"]);
-    } else if($_POST["formato"] == "periodo-expecifico") {
-        echo "Entrou no TERCEIRO IF";
-        relatorioPeriodoEspecificado($_POST["data-inicial"], $_POST["data-final"]);
-    } else if($_POST["formato"] == "historico-completo") {
-        echo "Entrou no QUARTO IF";
-        relatorioCompleto();
-    } else {
-        echo "<br> Chegou no ELSE";
-    }
-} else {
-    // var_dump($_POST["formato"]);
-}
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -45,7 +16,7 @@ if (isset($_POST) && isset($_POST["formato"])) {
             Gerar Relatórios
         </div>
         <div class="card-body">
-            <form action="relatorios.php" method="post">
+            <form action="exibeRelatorios.php" method="post">
                 <div class="row">
                 <div class="form-check col-12">
                         <input class="form-check-input" type="radio" name="formato" id="data-expecifica"
@@ -54,6 +25,9 @@ if (isset($_POST) && isset($_POST["formato"])) {
                             Uma Data Específica
                         </label>
                     </div>
+                    <div class="form-group col-12 especifico">
+                        <input class="form-control" type="date" name="data-especificada" id="data-especificada">
+                    </div>
                     <div class="form-check col-12">
                         <input class="form-check-input" type="radio" name="formato" id="periodo-expecifico"
                             value="periodo-expecifico">
@@ -61,21 +35,18 @@ if (isset($_POST) && isset($_POST["formato"])) {
                             Especificar um Período
                         </label>
                     </div>
+                    <div class="form-group col-6 periodo">
+                        <input class="form-control" type="date" name="data-inicial" id="data-inicial">
+                    </div>
+                    <div class="form-group col-6 periodo">
+                        <input class="form-control" type="date" name="data-final" id="data-final">
+                    </div>
                     <div class="form-check col-12">
                         <input class="form-check-input" type="radio" name="formato" id="historico-completo"
                             value="historico-completo">
                         <label class="form-check-label" for="historico-completo">
                             Todo o Histórico
                         </label>
-                    </div>
-                    <div class="form-group col-12 especifico">
-                        <input class="form-control" type="date" name="data-especificada" id="data-especificada">
-                    </div>
-                    <div class="form-group col-6 periodo">
-                        <input class="form-control" type="date" name="data-inicial" id="data-inicial">
-                    </div>
-                    <div class="form-group col-6 periodo">
-                        <input class="form-control" type="date" name="data-final" id="data-final">
                     </div>
                 </div>
                 <div class="row btn-row completo">

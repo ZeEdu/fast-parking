@@ -21,9 +21,22 @@ if ($_POST) {
 </head>
 
 <body>
-    <?php echo $recebeImpCorpo; ?>
+    <div class="card mx-auto mt-5 container" style="width:60vw">
+        <div class="card">
+            <div class="card-header text-center">
+                Recibo
+            </div>
 
-    <script src="../js/cadastro.js" type="module"></script>
+            <?php echo $recebeImpCorpo; ?>
+
+            <div class="row btn-row">
+                <a href='entrada.php' class='btn btn-primary btn-lg' role='button' aria-disabled='true'> Nova
+                    Entrada</a>
+                <a href='painelInicial.php' class='btn btn-danger btn-lg' role='button' aria-disabled='true'> Retornar
+                    ao Inicio</a>
+            </div>
+        </div>
+        <script src="../js/cadastro.js" type="module"></script>
 </body>
 
 </html>

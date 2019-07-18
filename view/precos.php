@@ -2,12 +2,12 @@
 
 include_once "../model/geral.php";
 session_start();
+$sessionVarSet = "";
 if ($_POST) {
     $_SESSION['primeiraHora'] = $_POST['primeira-hora'];
     $_SESSION['segundaHora'] = $_POST['horas-seguintes'];
+    $sessionVarSet = "<span> Adicionados </span>";
 }
-echo $_SESSION['primeiraHora'];
-echo $_SESSION['segundaHora'];
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ echo $_SESSION['segundaHora'];
 <body>
     <div class="card mx-auto mt-5 container" style="width:60vw">
         <div class="card-header text-center">
-            Atualizar Preços
+            Preços <?php echo $sessionVarSet ?>
         </div>
         <div class="card-body">
             <form action="precos.php" method="post">

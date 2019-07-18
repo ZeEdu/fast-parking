@@ -12,19 +12,12 @@ function entrada ($dados) {
 }
 
 function impressaoCorpo($dados){
-    return "<div class='row'>
-    <div class=col-12>
-      <div class='card'>
-        <div class='card-body'>
+    return "<div class='card-body'>
           <h5 class='card-title'>Recibo de Entrada</h5>
           <p class='card-text'>Nome do Cliente: ".$dados['nome']."</p>
           <p class='card-text'>Modelo do Veículo: ".$dados['modelo']."</p>
           <p class='card-text'>Placa do Veículo: ".$dados['placa']."</p>
           <p class='card-text'>Expedição do Recibo: ".date('Y-m-d H:i:s')."</p>
-          <a href='entrada.php' class='btn btn-danger btn-lg' role='button' aria-disabled='true'> Retornar ao Inicio</a>
-        </div>
-      </div>
-    </div>
     </div>";
 }
 
@@ -50,18 +43,60 @@ function saida($dados){
 
 function relatorioEspecificado($dataEspecificada){
   $conexao = include_once("conexao.php");
-  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataEspecificada." 00:00:00' AND '".$dataEspecificada." 23:59:59'";
-  echo $sql;
+  $sql = "SELECT id, modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataEspecificada." 00:00:00' AND '".$dataEspecificada." 23:59:59'";
+  $consulta = $conexao->query($sql);
+  $tableBody = "";  
+  while ($tableContent = $consulta->fetch_array()) {
+            $tableBody .= "<tr>
+                              <th>".$tableContent['id']."</th>
+                              <td>".$tableContent['modelo']."</td>
+                              <td>".$tableContent['placa']."</td>
+                              <td>".$tableContent['entrada']."</td>
+                              <td>".$tableContent['saida']."</td>
+                              <td>".$tableContent['pagamento']."</td>
+                          </tr>";
+  }
+  $consulta->close();
+  $conexao->close();
+  return $tableBody;
 }
 
 function relatorioPeriodoEspecificado($dataInicial, $dataFinal){
   $conexao = include_once("conexao.php");
-  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataInicial." 00:00:00' AND '".$dataFinal." 23:59:59'";
-  echo $sql;
+  $sql = "SELECT id, modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataInicial." 00:00:00' AND '".$dataFinal." 23:59:59'";
+  $consulta = $conexao->query($sql);
+  $tableBody = "";  
+  while ($tableContent = $consulta->fetch_array()) {
+            $tableBody .= "<tr>
+                              <th>".$tableContent['id']."</th>
+                              <td>".$tableContent['modelo']."</td>
+                              <td>".$tableContent['placa']."</td>
+                              <td>".$tableContent['entrada']."</td>
+                              <td>".$tableContent['saida']."</td>
+                              <td>".$tableContent['pagamento']."</td>
+                          </tr>";
+  }
+  $consulta->close();
+  $conexao->close();
+  return $tableBody;
 }
 
 function relatorioCompleto(){
   $conexao = include_once("conexao.php");
-  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida IS NOT NULL ORDER BY saida ASC";
-  echo $sql;
+  $sql = "SELECT id, modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida IS NOT NULL ORDER BY saida ASC";
+  $consulta = $conexao->query($sql);
+  $tableBody = "";  
+  while ($tableContent = $consulta->fetch_array()) {
+            $tableBody .= "<tr>
+                              <th>".$tableContent['id']."</th>
+                              <td>".$tableContent['modelo']."</td>
+                              <td>".$tableContent['placa']."</td>
+                              <td>".$tableContent['entrada']."</td>
+                              <td>".$tableContent['saida']."</td>
+                              <td>".$tableContent['pagamento']."</td>
+                          </tr>";
+  }
+  $consulta->close();
+  $conexao->close();
+  return $tableBody;
 }

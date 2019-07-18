@@ -1,10 +1,18 @@
 <?php
 
 include_once "../model/geral.php";
+
+session_start();
+$varSessaoNoti = "";
+
+if (isset($_SESSION['primeiraHora']) & isset($_SESSION['segundaHora'])) {
+    $varSessaoNoti =  "";
+} else {
+    $varSessaoNoti =  "<span> -  Preços não foram definidos</span>";
+}
 if ($_POST) {
     entrada ($_POST);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,7 +29,7 @@ if ($_POST) {
 <body>
     <div class="card mx-auto mt-5 container" style="width:60vw">
         <div class="card-header text-center">
-            Check-in de Cliente
+            Check-in de Cliente <?php echo $varSessaoNoti ?>
         </div>
         <div class="card-body">
             <form action="recibo.php" method="post">
