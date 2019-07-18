@@ -29,7 +29,7 @@ if ($_POST) {
 <body>
     <div class="card mx-auto mt-5 container" style="width:60vw">
         <div class="card-header text-center">
-            Check-in de Cliente <?php echo $varSessaoNoti ?>
+            Entrada do Cliente <?php echo $varSessaoNoti ?>
         </div>
         <div class="card-body">
             <form action="recibo.php" method="post">
