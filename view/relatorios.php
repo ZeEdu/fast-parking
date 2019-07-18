@@ -1,9 +1,29 @@
 <?php
 
 include_once "../model/geral.php";
-// SELECT SUM(pagamento) FROM `clientes` WHERE DATE_FORMAT(entrada, "%m-%Y") = "07-2019";
-if ($_POST) {
-    getPost ($_POST);
+// var_dump($_POST["formato"]);
+
+// $_POST["formato"] = "";
+
+// var_dump($_POST["formato"]);
+if (isset($_POST) && isset($_POST["formato"])) {
+    echo "Entrou no PRIMEIRO IF";
+    // var_dump($_POST["formato"]);
+    // var_dump($_POST["data-especificada"]);
+    if ($_POST["formato"] == "data-expecifica" && $_POST["data-especificada"] <> "" ) {
+        echo "Entrou no SEGUNDO IF";
+        relatorioEspecificado($_POST["data-especificada"]);
+    } else if($_POST["formato"] == "periodo-expecifico") {
+        echo "Entrou no TERCEIRO IF";
+        relatorioPeriodoEspecificado($_POST["data-inicial"], $_POST["data-final"]);
+    } else if($_POST["formato"] == "historico-completo") {
+        echo "Entrou no QUARTO IF";
+        relatorioCompleto();
+    } else {
+        echo "<br> Chegou no ELSE";
+    }
+} else {
+    // var_dump($_POST["formato"]);
 }
 
 ?>
@@ -25,10 +45,43 @@ if ($_POST) {
             Gerar Relatórios
         </div>
         <div class="card-body">
-            <form action="dashboard.php" method="post">
-                <div class="row btn-row">
-                    <input class="btn btn-success btn-lg" type="button" value="Gerar Relatórios" id="check-in">
-                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao Inicio</a>
+            <form action="relatorios.php" method="post">
+                <div class="row">
+                <div class="form-check col-12">
+                        <input class="form-check-input" type="radio" name="formato" id="data-expecifica"
+                            value="data-expecifica" checked>
+                        <label class="form-check-label" for="data-expecifica">
+                            Uma Data Específica
+                        </label>
+                    </div>
+                    <div class="form-check col-12">
+                        <input class="form-check-input" type="radio" name="formato" id="periodo-expecifico"
+                            value="periodo-expecifico">
+                        <label class="form-check-label" for="periodo-expecifico">
+                            Especificar um Período
+                        </label>
+                    </div>
+                    <div class="form-check col-12">
+                        <input class="form-check-input" type="radio" name="formato" id="historico-completo"
+                            value="historico-completo">
+                        <label class="form-check-label" for="historico-completo">
+                            Todo o Histórico
+                        </label>
+                    </div>
+                    <div class="form-group col-12 especifico">
+                        <input class="form-control" type="date" name="data-especificada" id="data-especificada">
+                    </div>
+                    <div class="form-group col-6 periodo">
+                        <input class="form-control" type="date" name="data-inicial" id="data-inicial">
+                    </div>
+                    <div class="form-group col-6 periodo">
+                        <input class="form-control" type="date" name="data-final" id="data-final">
+                    </div>
+                </div>
+                <div class="row btn-row completo">
+                    <input class="btn btn-success btn-lg" type="submit" value="Gerar Relatório" id="check-in">
+                    <a href="../index.php" class="btn btn-danger btn-lg" role="button" aria-disabled="true">Retornar ao
+                        Inicio</a>
                 </div>
             </form>
         </div>

@@ -28,7 +28,6 @@ function impressaoCorpo($dados){
     </div>";
 }
 
-
 function saida($dados){
   $conexao = include_once("conexao.php");
   $sql = "SELECT id, entrada FROM clientes WHERE placa = '$dados[placa]' AND saida IS NULL";
@@ -47,4 +46,22 @@ function saida($dados){
   } else {
     echo "Erro de Conexão";
   }
+}
+
+function relatorioEspecificado($dataEspecificada){
+  $conexao = include_once("conexao.php");
+  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataEspecificada." 00:00:00' AND '".$dataEspecificada." 23:59:59'";
+  echo $sql;
+}
+
+function relatorioPeriodoEspecificado($dataInicial, $dataFinal){
+  $conexao = include_once("conexao.php");
+  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida BETWEEN '".$dataInicial." 00:00:00' AND '".$dataFinal." 23:59:59'";
+  echo $sql;
+}
+
+function relatorioCompleto(){
+  $conexao = include_once("conexao.php");
+  $sql = "SELECT modelo, placa, entrada, saida, pagamento FROM clientes WHERE saida IS NOT NULL ORDER BY saida ASC";
+  echo $sql;
 }
